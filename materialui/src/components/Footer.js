@@ -5,7 +5,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Icon from '@mdi/react';
-import { mdiFacebookBox, mdiLinkedin  } from '@mdi/js';
+import { mdiFacebookBox, mdiLinkedin, mdiInstagram } from '@mdi/js';
 
 const useStyles = makeStyles(theme => ({
   appBar: {
@@ -18,6 +18,9 @@ const useStyles = makeStyles(theme => ({
     display:'flex',
     flexDirection: 'row',
     justifyContent: 'space-around',
+    marginTop: 'auto',
+    marginBottom: 'auto',
+    minHeight:'3rem'
   },
   container: {
     flexGrow: 1,
@@ -29,24 +32,15 @@ export default function BottomAppBar() {
   return (
     <React.Fragment>
       <CssBaseline />
-      <AppBar color="secondary" className={classes.appBar}>
+      <AppBar className={classes.appBar}>
         <Toolbar className={classes.toolbar}>
           <Typography variant='h6'>Follow us:</Typography>
-          <a href="https://www.facebook.com/AKKATechnologiesGroup/?__tn__=%2Cd%2CP-R&eid=ARDb96i-ehRo8NxpGiPpEHdINsFwz6Py3DJPz_eIHofjbgKMsipdgZZRfwX5GZDtA94pKE7gTHK-fmGF"><Icon path={mdiFacebookBox} size={1.5} color="whitesmoke"/></a>
-          <a href="https://www.facebook.com/"></a>
-          <a href="https://www.linkedin.com/"></a>
-          <a href="https://www.instagram.com/"></a>
+          <a href="https://www.facebook.com/"> <Icon color="white" size={1.5} path={mdiFacebookBox} /></a>
+          <a href="https://www.linkedin.com/"> <Icon color="white" size={1.5} path={mdiLinkedin} /></a>
+          <a href="https://www.instagram.com/"><Icon color="white" size={1.5} path={mdiInstagram} /></a>
         </Toolbar>
       </AppBar>
       <Toolbar />
     </React.Fragment>
   );
 }
-
-/*
-
-import FacebookIcon from '@material-ui/icons/Facebook';
-import LinkedInIcon from '@material-ui/icons/LinkedIn';
-import InstagramIcon from '@material-ui/icons/Instagram';
-<FacebookIcon/>
-*/
