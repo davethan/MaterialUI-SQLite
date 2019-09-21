@@ -5,14 +5,14 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Icon from '@mdi/react';
-import { mdiFacebookBox, mdiLinkedin, mdiInstagram } from '@mdi/js';
+import { mdiFacebookBox, mdiLinkedin, mdiInstagram, mdiTwitter, mdiPinterest } from '@mdi/js';
 
 const useStyles = makeStyles(theme => ({
   appBar: {
     position: 'fixed',
     top: 'auto',
     bottom: 0,
-    height: '3rem',
+    height: '2.5rem',
   },
   toolbar:{
     display:'flex',
@@ -20,10 +20,7 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'space-around',
     marginTop: 'auto',
     marginBottom: 'auto',
-    minHeight:'3rem'
-  },
-  container: {
-    flexGrow: 1,
+    minHeight:'2.5rem'
   },
 }));
 
@@ -34,10 +31,11 @@ export default function BottomAppBar() {
       <CssBaseline />
       <AppBar className={classes.appBar}>
         <Toolbar className={classes.toolbar}>
-          <Typography variant='h6'>Follow us:</Typography>
-          <a href="https://www.facebook.com/"> <Icon color="white" size={1.5} path={mdiFacebookBox} /></a>
-          <a href="https://www.linkedin.com/"> <Icon color="white" size={1.5} path={mdiLinkedin} /></a>
-          <a href="https://www.instagram.com/"><Icon color="white" size={1.5} path={mdiInstagram} /></a>
+          <a href="https://www.facebook.com/"> <Icon color="white" size={1} path={mdiFacebookBox} /></a>
+          <a href="https://www.linkedin.com/"> <Icon color="white" size={1} path={mdiLinkedin} /></a>
+          <a href="https://www.instagram.com/"><Icon color="white" size={1} path={mdiInstagram} /></a>
+          <a href="https://www.twitter.com/"><Icon color="white" size={1} path={mdiTwitter} /></a>
+          <a href="https://www.tmblr.com/"><Icon color="white" size={1} path={mdiPinterest} /></a>
         </Toolbar>
       </AppBar>
       <Toolbar />
