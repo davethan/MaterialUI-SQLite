@@ -49,9 +49,9 @@ export default function Dropdown() {
             <Icon color="white" size={1} path={mdiDotsVertical} />
           </IconButton>
           {open ? (
-            <Paper color="secondary" className={classes.paper}>
+            <Paper className={classes.paper}>
+              <Link className={classes.link} to="/"><MenuItem><Typography>Latest News</Typography></MenuItem></Link>
               <Link className={classes.link} to="/photos"><MenuItem><Typography>Photos</Typography></MenuItem></Link>
-              <Link className={classes.link} to="/secondlink"><MenuItem><Typography>second link</Typography></MenuItem></Link>
               <Link className={classes.link} to="/thirdlink"><MenuItem><Typography>third link</Typography></MenuItem></Link>
               <Link className={classes.link} to="/fourthlink"><MenuItem><Typography>fourth link</Typography></MenuItem></Link>
             </Paper>

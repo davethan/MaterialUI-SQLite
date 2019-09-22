@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function PostContainer() {
+export default function ImageContainer() {
   const classes = useStyles();
 
   return (
