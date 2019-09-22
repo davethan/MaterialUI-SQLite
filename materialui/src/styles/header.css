@@ -3,12 +3,10 @@ h2 {
     text-align: center;
     font-weight: 100;
     font-size: 2rem;
-    color: white;
-    text-decoration: none;
     margin:0;
 }
 
-h2 a {
+h2 a{
     color: white;
     text-decoration: none;
 }

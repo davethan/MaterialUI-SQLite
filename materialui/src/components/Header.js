@@ -7,6 +7,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Slide from '@material-ui/core/Slide';
 import { makeStyles } from '@material-ui/core/styles';
+import Dropdown from './Dropdown.js';
 import '../styles/header.css';
 
 function HideOnScroll(props) {
@@ -33,20 +34,15 @@ const useStyles = makeStyles(theme => ({
   toolbar:{
     display:'flex',
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     marginTop: 'auto',
     marginBottom: 'auto',
-    minHeight:'2.5rem'
+    minHeight:'2.5rem',
   },
 }));
 
 HideOnScroll.propTypes = {
   children: PropTypes.element.isRequired,
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
-  //window: PropTypes.func,
 };
 
 export default function HideAppBar(props) {
@@ -57,7 +53,8 @@ export default function HideAppBar(props) {
       <HideOnScroll {...props}>
         <AppBar className={classes.appBar}>
           <Toolbar className={classes.toolbar}>
-            <h2>My Summer</h2>
+            <h2><a href="http://localhost:3000/">My Summer</a></h2>
+            <Dropdown/>
           </Toolbar>
         </AppBar>
       </HideOnScroll>
