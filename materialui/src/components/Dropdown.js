@@ -3,10 +3,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
-import MenuIcon from '@material-ui/icons/Menu';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import MenuItem from '@material-ui/core/MenuItem';
+import Icon from '@mdi/react';
+import { mdiDotsVertical } from '@mdi/js';
+import {Route, Link} from 'react-router-dom'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -20,6 +22,10 @@ const useStyles = makeStyles(theme => ({
   },
   menuButton: {
     marginLeft: theme.spacing(10),
+  },
+  link:{
+    textDecoration:'none',
+    color:'black'
   },
 }));
 
@@ -40,15 +46,14 @@ export default function Dropdown() {
       <ClickAwayListener onClickAway={handleClickAway}>
         <div>
           <IconButton onClick={handleClick} edge="start" className={classes.menuButton} aria-label="menu">
-            <MenuIcon />
+            <Icon color="white" size={1} path={mdiDotsVertical} />
           </IconButton>
           {open ? (
-            <Paper className={classes.paper}>
-              <MenuItem><Typography>First Link</Typography></MenuItem>
-              <MenuItem><Typography>Second Link</Typography></MenuItem>
-              <MenuItem><Typography>Third Link</Typography></MenuItem>
-              <MenuItem><Typography>Fourth Link</Typography></MenuItem>
-              <MenuItem><Typography>Fifth Link</Typography></MenuItem>
+            <Paper color="secondary" className={classes.paper}>
+              <Link className={classes.link} to="/photos"><MenuItem><Typography>Photos</Typography></MenuItem></Link>
+              <Link className={classes.link} to="/secondlink"><MenuItem><Typography>second link</Typography></MenuItem></Link>
+              <Link className={classes.link} to="/thirdlink"><MenuItem><Typography>third link</Typography></MenuItem></Link>
+              <Link className={classes.link} to="/fourthlink"><MenuItem><Typography>fourth link</Typography></MenuItem></Link>
             </Paper>
           ) : null}
         </div>
