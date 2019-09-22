@@ -6,6 +6,8 @@ import Typography from '@material-ui/core/Typography';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Slide from '@material-ui/core/Slide';
+import { makeStyles } from '@material-ui/core/styles';
+import '../styles/header.css';
 
 function HideOnScroll(props) {
   const { children, window } = props;
@@ -21,6 +23,23 @@ function HideOnScroll(props) {
   );
 }
 
+const useStyles = makeStyles(theme => ({
+  appBar: {
+    position: 'fixed',
+    bottom: 'auto',
+    top: 0,
+    height: '3.5rem'
+  },
+  toolbar:{
+    display:'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginTop: 'auto',
+    marginBottom: 'auto',
+    minHeight:'2.5rem'
+  },
+}));
+
 HideOnScroll.propTypes = {
   children: PropTypes.element.isRequired,
   /**
@@ -31,13 +50,14 @@ HideOnScroll.propTypes = {
 };
 
 export default function HideAppBar(props) {
+  const classes = useStyles();
   return (
     <React.Fragment>
       <CssBaseline />
       <HideOnScroll {...props}>
-        <AppBar>
-          <Toolbar>
-            <Typography variant="h6">Header</Typography>
+        <AppBar className={classes.appBar}>
+          <Toolbar className={classes.toolbar}>
+            <h2>My Summer</h2>
           </Toolbar>
         </AppBar>
       </HideOnScroll>

@@ -22,6 +22,9 @@ const useStyles = makeStyles(theme => ({
     marginBottom: 'auto',
     minHeight:'2.5rem'
   },
+  divToStop:{
+    height: '45px',
+  },
 }));
 
 export default function BottomAppBar() {
@@ -38,7 +41,7 @@ export default function BottomAppBar() {
           <a href="https://www.tmblr.com/"><Icon color="white" size={1} path={mdiPinterest} /></a>
         </Toolbar>
       </AppBar>
-      <Toolbar />
+      <div className={classes.divToStop}/>
     </React.Fragment>
   );
 }
