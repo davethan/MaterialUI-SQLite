@@ -2,13 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Slide from '@material-ui/core/Slide';
-import { makeStyles } from '@material-ui/core/styles';
-import Dropdown from './Dropdown.js';
-import '../styles/header.css';
+import Dropdown from '../dropdown/Dropdown.js';
+import '../../styles/header.css';
+import useStyles from './Style.js';
 
 function HideOnScroll(props) {
   const { children, window } = props;
@@ -23,23 +22,6 @@ function HideOnScroll(props) {
     </Slide>
   );
 }
-
-const useStyles = makeStyles(theme => ({
-  appBar: {
-    position: 'fixed',
-    bottom: 'auto',
-    top: 0,
-    height: '3.5rem'
-  },
-  toolbar:{
-    display:'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: 'auto',
-    marginBottom: 'auto',
-    minHeight:'2.5rem',
-  },
-}));
 
 HideOnScroll.propTypes = {
   children: PropTypes.element.isRequired,

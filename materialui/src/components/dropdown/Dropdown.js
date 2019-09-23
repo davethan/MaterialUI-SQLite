@@ -1,33 +1,13 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import MenuItem from '@material-ui/core/MenuItem';
 import Icon from '@mdi/react';
 import { mdiDotsVertical } from '@mdi/js';
-import {Route, Link} from 'react-router-dom'
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    position: 'relative',
-  },
-  paper: {
-    position: 'absolute',
-    top: 36,
-    right: 0,
-    left: 0,
-  },
-  menuButton: {
-    marginLeft: theme.spacing(10),
-  },
-  link:{
-    textDecoration:'none',
-    color:'black'
-  },
-}));
+import {Link} from 'react-router-dom'
+import useStyles from './Style.js'
 
 export default function Dropdown() {
   const [open, setOpen] = React.useState(false);

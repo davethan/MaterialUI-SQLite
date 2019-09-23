@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import App from './components/app/App.js';
 import { BrowserRouter } from 'react-router-dom'
 import * as serviceWorker from './serviceWorker';
-import {MuiTheme, createMuiTheme, MuiThemeProvider} from '@material-ui/core'
+import {createMuiTheme, MuiThemeProvider} from '@material-ui/core'
 import {blue, yellow} from '@material-ui/core/colors'
 
 const theme = createMuiTheme({
