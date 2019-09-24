@@ -6,7 +6,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Slide from '@material-ui/core/Slide';
 import Dropdown from '../dropdown/Dropdown.js';
-import '../../styles/header.css';
+import './header.css';
 import useStyles from './Style.js';
 
 function HideOnScroll(props) {
@@ -35,7 +35,7 @@ export default function HideAppBar(props) {
       <HideOnScroll {...props}>
         <AppBar className={classes.appBar}>
           <Toolbar className={classes.toolbar}>
-            <h2><a href="http://localhost:3000/">My Summer</a></h2>
+            <h2 className={classes.h2}><a className={classes.a} href="http://localhost:3000/">My Summer</a></h2>
             <Dropdown/>
           </Toolbar>
         </AppBar>
