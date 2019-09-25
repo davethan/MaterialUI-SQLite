@@ -21,7 +21,6 @@ const useStyles = makeStyles(theme => ({
     fontWeight: 100,
     fontSize: '2rem',
     margin:0,
-    fontWeight: 'normal',
     fontStyle: 'normal',
   },
   a:{

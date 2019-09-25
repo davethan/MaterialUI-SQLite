@@ -4,6 +4,7 @@ const useStyles = makeStyles({
   card: {
     width: '50%',
     margin:'auto',
+    marginBottom: '0.5rem',
   },
   media: {
     height: 140,
