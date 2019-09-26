@@ -5,6 +5,7 @@ import Header from '../header/Header.js';
 import AllPosts from '../allPosts/AllPosts.js';
 import Footer from '../footer/Footer.js';
 import cardData from '../../data/cardData.js';
+import Post from '../post/Post.js';
 
 function App() {
   return (
@@ -19,6 +20,9 @@ function App() {
       )}/>
       <Route exact path="/photos" render={()=>(
         <ImageContainer/>
+      )}/>
+      <Route exact path="/post/:id" render={(params)=>(
+        <Post {...params}/>
       )}/>
       <Footer/>
     </div>

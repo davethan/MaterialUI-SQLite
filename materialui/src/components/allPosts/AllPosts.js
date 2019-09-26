@@ -11,7 +11,7 @@ export default function Post(props) {
   const classes = useStyles();
 
   return (
-      <Link to={`/image/${props.id}`} className={classes.link}>
+      <Link to={`/post/${props.id}`} className={classes.link}>
         <Card className={classes.card}>
           <CardActionArea>
             <CardMedia
