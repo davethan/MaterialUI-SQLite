@@ -7,12 +7,13 @@ import Typography from '@material-ui/core/Typography';
 import {Link} from 'react-router-dom';
 import useStyles from './Style.js';
 
-export default function Post(props) {
+export default function AllPosts(props) {
   const classes = useStyles();
 
   return (
-      <Link to={`/post/${props.id}`} className={classes.link}>
+
         <Card className={classes.card}>
+        <Link to={`/post/${props.id}`} className={classes.link}>
           <CardActionArea>
             <CardMedia
               className={classes.media}
@@ -28,7 +29,8 @@ export default function Post(props) {
               </Typography>
             </CardContent>
           </CardActionArea>
+          </Link>
         </Card>
-      </Link>
+
   );
 }

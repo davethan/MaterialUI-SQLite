@@ -13,8 +13,8 @@ function App() {
       <Header/>
       <Route exact path="/" render={()=>(
         <div>
-          {cardData.map(card => (
-            <AllPosts id={card.id} img={card.img} title={card.title} description={card.description}/>
+          {cardData.map((card,id) => (
+            <AllPosts key={id} id={card.id} img={card.img} title={card.title} description={card.description}/>
           ))}
         </div>
       )}/>

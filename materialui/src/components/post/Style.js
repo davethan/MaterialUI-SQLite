@@ -10,7 +10,7 @@ const useStyles = makeStyles({
     marginBottom: '0.5rem',
   },
   media: {
-    height: 200,
+    height: '20rem',
   },
   '@media (max-width: 1000px) and (min-width: 600px)':{
     card: {
