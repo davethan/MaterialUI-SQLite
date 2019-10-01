@@ -9,6 +9,22 @@ import useStyles from './Style.js';
 
 export default function AllPosts(props) {
   const classes = useStyles();
+  //initialize everything
+  const [currentId] = React.useState(1); //this has to change!!!
+  const [currentPic, setCurrentPic] = React.useState('img3.jpg');
+  const [currentTitle, setCurrentTitle] = React.useState('Post');
+  const [currentDescription, setCurrentDescription] = React.useState('Post Description');
+
+  const getImage = () => {
+    fetch('http://localhost:3001/onePost/' + currentId)
+    .then(response => response.json())
+    .then(data => {
+        setCurrentPic(data[0].imageName); //image={require('../../images/'+currentPic)}
+        setCurrentTitle(data[0].title);
+        setCurrentDescription(data[0].description);
+    })
+  }
+  getImage()
 
   return (
         <Card className={classes.card}>

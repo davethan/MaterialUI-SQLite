@@ -27,6 +27,12 @@ app.get("/images", (req, res, next) => {
       });
 });
 
+var allTheDB = require('./components/allTheDB');
+var onePost = require('./components/onePost');
+
+app.use('/allTheDB', allTheDB);
+app.use('/onePost', onePost);
+
 // Default response for any other request
 app.use(function(req, res){
     res.status(404);
