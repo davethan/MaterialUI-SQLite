@@ -11,7 +11,6 @@ export default function AllPosts(props) {
   const classes = useStyles();
 
   return (
-
         <Card className={classes.card}>
         <Link to={`/post/${props.id}`} className={classes.link}>
           <CardActionArea>
@@ -31,6 +30,5 @@ export default function AllPosts(props) {
           </CardActionArea>
           </Link>
         </Card>
-
   );
 }
