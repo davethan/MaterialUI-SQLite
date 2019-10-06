@@ -15,17 +15,6 @@ app.get("/", (req, res, next) => {
 });
 
 // Insert here other API endpoints
-app.get("/images", (req, res, next) => {
-    var sql = "select imageName from cardData"
-    var params = []
-    db.all(sql, params, (err, rows) => {
-        if (err) {
-          res.status(400).json({"error":err.message});
-          return;
-        }
-        res.json(rows)
-      });
-});
 
 var allTheDB = require('./components/allTheDB');
 var onePost = require('./components/onePost');

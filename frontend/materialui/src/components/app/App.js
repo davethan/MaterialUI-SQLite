@@ -5,8 +5,9 @@ import Header from '../header/Header.js';
 import AllPosts from '../allPosts/AllPosts.js';
 import Footer from '../footer/Footer.js';
 import Post from '../post/Post.js';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
-function App() {
+export default function App() {
   const [postData, setPostData] = React.useState();
 
   const getPosts = () => {
@@ -21,9 +22,10 @@ function App() {
     getPosts()
   }
 
+  //returning every post
   const returnPosts = (postData)=>{
     if (postData===undefined) {return(
-      <div>Loading, please wait...</div>
+      <CircularProgress/>
     )}
     else {
       return(
@@ -57,5 +59,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
