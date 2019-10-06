@@ -15,7 +15,7 @@ export default function AllPosts(props) {
           <CardActionArea>
             <CardMedia
               className={classes.media}
-              image={props.img}
+              image={require('../../images/'+props.imageName)}
               title={props.title}
             />
             <CardContent color="Secondary" >
