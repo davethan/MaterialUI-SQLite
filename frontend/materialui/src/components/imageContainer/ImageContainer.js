@@ -3,6 +3,7 @@ import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import useStyles from './Style.js'
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Loading from '../loading/Loading.js';
 
 export default function ImageContainer() {
   const classes = useStyles();
@@ -18,7 +19,7 @@ export default function ImageContainer() {
 
   if (tileData===undefined) {
     getTileData()
-    return (<CircularProgress/>)
+    return (<Loading/>)
   }
   else{
     return (

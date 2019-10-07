@@ -6,6 +6,7 @@ import AllPosts from '../allPosts/AllPosts.js';
 import Footer from '../footer/Footer.js';
 import Post from '../post/Post.js';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Loading from '../loading/Loading.js';
 
 export default function App() {
   const [postData, setPostData] = React.useState();
@@ -24,9 +25,7 @@ export default function App() {
 
   //returning every post
   const returnPosts = (postData)=>{
-    if (postData===undefined) {return(
-      <CircularProgress/>
-    )}
+    if (postData===undefined) {return(<Loading/>)}
     else {
       return(
         postData.map((card,id) => (
