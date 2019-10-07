@@ -28,6 +28,28 @@ let db = new sqlite3.Database(DBSOURCE, (err) => {
                 db.run(insert, ["img4.jpg","Breakfast","My daily breakfast included eggs, bacon, beans, marmelade, etc... :)","The breakfast of the Gods!"]);
             }
         });
+        db.run(`CREATE TABLE tileImages(
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          imageName TEXT,
+          title TEXT,
+          cols INTEGER
+        )`,
+      (err)=>{
+        if (err) {
+          //table already created
+        }else{
+          //The data are not being inserted by this order, so the id becomes useless... FIX IT!!!
+          var insert = 'INSERT INTO tileImages(imageName, title, cols) VALUES (?,?,?)'
+          db.run(insert,["img1.jpg","Image1","1"]);
+          db.run(insert,["img2.jpg","Image2","2"]);
+          db.run(insert,["img3.jpg","Image3","3"]);
+          db.run(insert,["img4.jpg","Image4","1"]);
+          db.run(insert,["img5.jpg","Image5","2"]);
+          db.run(insert,["img6.jpg","Image6","2"]);
+          db.run(insert,["img7.jpg","Image7","1"]);
+          db.run(insert,["img8.jpg","Image8","3"]);
+        }
+      });
     }
 });
 
