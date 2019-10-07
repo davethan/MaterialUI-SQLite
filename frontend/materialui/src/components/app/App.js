@@ -1,15 +1,18 @@
 import React from 'react';
 import ImageContainer from '../imageContainer/ImageContainer.js';
+import Button from '@material-ui/core/Button';
 import {Route} from 'react-router-dom';
+import Typography from '@material-ui/core/Typography';
 import Header from '../header/Header.js';
 import AllPosts from '../allPosts/AllPosts.js';
 import Footer from '../footer/Footer.js';
 import Post from '../post/Post.js';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import Loading from '../loading/Loading.js';
+import useStyles from './Style.js'
 
 export default function App() {
   const [postData, setPostData] = React.useState();
+  const classes = useStyles();
 
   const getPosts = () => {
     fetch('http://localhost:3001/allTheDB/')
@@ -44,8 +47,17 @@ export default function App() {
     <div>
       <Header/>
       <Route exact path="/" render={()=>(
-        <div>
+        <div className={classes.mainPage}>
           {returnPosts(postData)}
+          {/*
+          <Button
+            variant="contained"
+            color="secondary"
+            className="uploadButton"
+          >
+            <Typography variant="h6">Upload A Post!</Typography>
+          </Button>
+        */}
         </div>
       )}/>
       <Route exact path="/photos" render={()=>(

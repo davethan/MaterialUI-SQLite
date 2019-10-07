@@ -1,5 +1,4 @@
 import React from 'react';
-import {Route} from 'react-router-dom';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import useStyles from './Style.js';
 

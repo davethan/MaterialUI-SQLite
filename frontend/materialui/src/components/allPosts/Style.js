@@ -20,7 +20,7 @@ const useStyles = makeStyles({
   },
   '@media(max-width: 600px)':{
     card: {
-      width: '90%',
+      width: '100%',
     },
   },
 });
