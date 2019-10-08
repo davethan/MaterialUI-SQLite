@@ -12,7 +12,6 @@ import useStyles from './Style.js'
 
 export default function App() {
   const [postData, setPostData] = React.useState();
-  const classes = useStyles();
 
   const getPosts = () => {
     fetch('http://localhost:3001/allTheDB/')
@@ -42,7 +41,7 @@ export default function App() {
       )
     }
   }
-
+  const classes = useStyles();
   return (
     <div>
       <Header/>
@@ -53,11 +52,11 @@ export default function App() {
           <Button
             variant="contained"
             color="secondary"
-            className="uploadButton"
+            className={classes.uploadButton}
           >
-            <Typography variant="h6">Upload A Post!</Typography>
+            <Typography variant="h6">Upload a post!</Typography>
           </Button>
-        */}
+          */}
         </div>
       )}/>
       <Route exact path="/photos" render={()=>(
