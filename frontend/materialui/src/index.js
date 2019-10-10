@@ -5,6 +5,11 @@ import { BrowserRouter } from 'react-router-dom'
 import * as serviceWorker from './serviceWorker';
 import {createMuiTheme, MuiThemeProvider} from '@material-ui/core'
 import {blue, yellow} from '@material-ui/core/colors'
+import { createStore } from "redux";
+import rootReducer from "./redux/reducer";
+import { Provider } from "react-redux";
+
+const store = createStore(rootReducer);
 
 const theme = createMuiTheme({
     palette:{
@@ -21,7 +26,16 @@ const theme = createMuiTheme({
     }
 })
 
-ReactDOM.render(<BrowserRouter><MuiThemeProvider theme={theme}><App /></MuiThemeProvider></BrowserRouter>, document.getElementById('root'));
+ReactDOM.render(
+  <Provider store={store}>
+    <BrowserRouter>
+      <MuiThemeProvider theme={theme}>
+        <App />
+      </MuiThemeProvider>
+    </BrowserRouter>
+  </Provider>,
+  document.getElementById('root')
+);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

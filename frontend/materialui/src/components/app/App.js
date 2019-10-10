@@ -9,8 +9,10 @@ import Footer from '../footer/Footer.js';
 import Post from '../post/Post.js';
 import Loading from '../loading/Loading.js';
 import useStyles from './Style.js'
+import { connect } from "react-redux";
 
-export default function App() {
+function App(props) {
+  console.log(props)
   const [postData, setPostData] = React.useState();
 
   const getPosts = () => {
@@ -69,3 +71,11 @@ export default function App() {
     </div>
   );
 }
+
+function mapStateToProps(state) {
+  return {
+    state: state
+  };
+}
+
+export default connect(mapStateToProps)(App)
