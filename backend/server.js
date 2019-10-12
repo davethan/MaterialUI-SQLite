@@ -16,11 +16,9 @@ app.get("/", (req, res, next) => {
 
 // Insert here other API endpoints
 var allTheDB = require('./components/allTheDB');
-var onePost = require('./components/onePost');
 var tileImages = require('./components/tileImages');
 
 app.use('/allTheDB', allTheDB);
-app.use('/onePost', onePost);
 app.use('/tileImages',tileImages)
 
 // Default response for any other request

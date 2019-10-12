@@ -1,11 +1,11 @@
-const initialState = 1; //initializing the state
+const initialState = null; //initializing the state
 
 const changeANumber = function changeTheThingIWant(
   state = initialState,
   action
 ) {
   switch (action.type) {
-    case "ACTION1":
+    case "GET_POSTS_DATA":
       return (state = action.state);
     default:
       return state;
