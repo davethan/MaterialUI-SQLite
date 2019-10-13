@@ -1,15 +1,33 @@
+import { combineReducers } from "redux";
+
 const initialState = null; //initializing the state
 
-const changeANumber = function changeTheThingIWant(
-  state = initialState,
+const getPostsDataReducer = function getPostsData(
+  postsData = initialState,
   action
 ) {
   switch (action.type) {
     case "GET_POSTS_DATA":
-      return (state = action.state);
+      return (postsData = action.state);
     default:
-      return state;
+      return postsData;
   }
 };
 
-export default changeANumber;
+const getTileDataReducer = function getTileData(
+  tileData = initialState,
+  action
+) {
+  switch (action.type) {
+    case "GET_TILE_DATA":
+      return (tileData = action.state);
+    default:
+      return tileData;
+  }
+};
+
+const rootReducer = combineReducers({
+  getPostsDataReducer,
+  getTileDataReducer
+});
+export default rootReducer;

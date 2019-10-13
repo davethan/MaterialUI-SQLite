@@ -14,3 +14,20 @@ export function loadPostsData(data) {
     state: data
   };
 }
+
+export function startGettingTileData() {
+  return dispatch => {
+    return fetch('http://localhost:3001/tileImages/')
+    .then(response => response.json())
+    .then(data => {
+        dispatch(loadTileData(data)); //trigger the action
+    });
+  };
+}
+
+export function loadTileData(data) {
+  return {
+    type: "GET_TILE_DATA",
+    state: data
+  };
+}

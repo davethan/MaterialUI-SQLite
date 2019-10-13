@@ -11,25 +11,31 @@ import Loading from '../loading/Loading.js';
 import useStyles from './Style.js'
 import { connect } from "react-redux";
 import { startGettingPostsData } from "../../redux/actions.js"
+import { startGettingTileData } from "../../redux/actions.js"
 
 function App(props) {
+  console.log(props)
   const classes = useStyles();
 
-  if (props.dataByReducer === null){
+  if (props.dataByReducer.getPostsDataReducer === null){
     props.dispatch(startGettingPostsData())
+  }
+
+  if (props.dataByReducer.getTileDataReducer === null){
+    props.dispatch(startGettingTileData())
   }
 
   //returning every post
   const returnPosts = ()=>{
-    if (props.dataByReducer === null) {return(<Loading/>)}
+    if (props.dataByReducer.getPostsDataReducer === null) {return(<Loading/>)}
     else {
       return(
-        props.dataByReducer.map((card,id) => (
+        props.dataByReducer.getPostsDataReducer.map((card,id) => (
           <AllPosts key={id}
-                    id={props.dataByReducer[id].id}
-                    imageName={props.dataByReducer[id].imageName}
-                    title={props.dataByReducer[id].title}
-                    description={props.dataByReducer[id].description}
+                    id={props.dataByReducer.getPostsDataReducer[id].id}
+                    imageName={props.dataByReducer.getPostsDataReducer[id].imageName}
+                    title={props.dataByReducer.getPostsDataReducer[id].title}
+                    description={props.dataByReducer.getPostsDataReducer[id].description}
           />
         ))
       )
@@ -37,16 +43,10 @@ function App(props) {
   }
 
   const individualPost = (params) => {
-    if (props.dataByReducer !== null){
-      // console.log(props)
-      // const resultat = inventaire.find( fruit => fruit.nom === 'cerises');
+    if (props.dataByReducer.getPostsDataReducer !== null){
       const id = Number(params.match.params.id)
-      // console.log(id)
-      const propsToBeSent = props.dataByReducer[id-1]
-      // console.log (propsToBeSent)
-      return (
-        <Post {...params} {...propsToBeSent}/>
-      )
+      const propsToBeSent = props.dataByReducer.getPostsDataReducer[id-1]
+      return (<Post {...params} {...propsToBeSent}/>)
     }
   }
 
@@ -68,7 +68,7 @@ function App(props) {
         </div>
       )}/>
       <Route exact path="/photos" render={()=>(
-        <ImageContainer/>
+        <ImageContainer props={props.dataByReducer.getTileDataReducer}/>
       )}/>
       <Route exact path="/post/:id" render={(params)=>(
         <div>
