@@ -28,6 +28,7 @@ HideOnScroll.propTypes = {
 };
 
 export default function HideAppBar(props) {
+  // console.log(props)
   const classes = useStyles();
   return (
     <React.Fragment>
@@ -36,7 +37,7 @@ export default function HideAppBar(props) {
         <AppBar className={classes.appBar}>
           <Toolbar className={classes.toolbar}>
             <h2 className={classes.h2}><a className={classes.a} href="http://localhost:3000/">My Summer</a></h2>
-            <Dropdown/>
+            <Dropdown {...props}/>
           </Toolbar>
         </AppBar>
       </HideOnScroll>

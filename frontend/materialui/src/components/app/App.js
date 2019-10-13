@@ -14,28 +14,27 @@ import { startGettingPostsData } from "../../redux/actions.js"
 import { startGettingTileData } from "../../redux/actions.js"
 
 function App(props) {
-  console.log(props)
   const classes = useStyles();
 
-  if (props.dataByReducer.getPostsDataReducer === null){
+  if (props.dataByReducers.getPostsDataReducer === null){
     props.dispatch(startGettingPostsData())
   }
 
-  if (props.dataByReducer.getTileDataReducer === null){
+  if (props.dataByReducers.getTileDataReducer === null){
     props.dispatch(startGettingTileData())
   }
 
   //returning every post
   const returnPosts = ()=>{
-    if (props.dataByReducer.getPostsDataReducer === null) {return(<Loading/>)}
+    if (props.dataByReducers.getPostsDataReducer === null) {return(<Loading/>)}
     else {
       return(
-        props.dataByReducer.getPostsDataReducer.map((card,id) => (
+        props.dataByReducers.getPostsDataReducer.map((card,id) => (
           <AllPosts key={id}
-                    id={props.dataByReducer.getPostsDataReducer[id].id}
-                    imageName={props.dataByReducer.getPostsDataReducer[id].imageName}
-                    title={props.dataByReducer.getPostsDataReducer[id].title}
-                    description={props.dataByReducer.getPostsDataReducer[id].description}
+                    id={props.dataByReducers.getPostsDataReducer[id].id}
+                    imageName={props.dataByReducers.getPostsDataReducer[id].imageName}
+                    title={props.dataByReducers.getPostsDataReducer[id].title}
+                    description={props.dataByReducers.getPostsDataReducer[id].description}
           />
         ))
       )
@@ -43,16 +42,16 @@ function App(props) {
   }
 
   const individualPost = (params) => {
-    if (props.dataByReducer.getPostsDataReducer !== null){
+    if (props.dataByReducers.getPostsDataReducer !== null){
       const id = Number(params.match.params.id)
-      const propsToBeSent = props.dataByReducer.getPostsDataReducer[id-1]
+      const propsToBeSent = props.dataByReducers.getPostsDataReducer[id-1]
       return (<Post {...params} {...propsToBeSent}/>)
     }
   }
 
   return (
     <div>
-      <Header/>
+      <Header stateOfMenu={props.dataByReducers.stateOfMenuReducer} dispatch={props.dispatch}/>
       <Route exact path="/" render={()=>(
         <div className={classes.mainPage}>
           {returnPosts()}
@@ -68,7 +67,7 @@ function App(props) {
         </div>
       )}/>
       <Route exact path="/photos" render={()=>(
-        <ImageContainer props={props.dataByReducer.getTileDataReducer}/>
+        <ImageContainer props={props.dataByReducers.getTileDataReducer}/>
       )}/>
       <Route exact path="/post/:id" render={(params)=>(
         <div>
@@ -83,7 +82,7 @@ function App(props) {
 //Redux Injection!
 function mapStateToProps(state) {
   return {
-    dataByReducer: state
+    dataByReducers: state
   };
 }
 

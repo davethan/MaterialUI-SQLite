@@ -1,9 +1,7 @@
 import { combineReducers } from "redux";
 
-const initialState = null; //initializing the state
-
 const getPostsDataReducer = function getPostsData(
-  postsData = initialState,
+  postsData = null,
   action
 ) {
   switch (action.type) {
@@ -15,7 +13,7 @@ const getPostsDataReducer = function getPostsData(
 };
 
 const getTileDataReducer = function getTileData(
-  tileData = initialState,
+  tileData = null,
   action
 ) {
   switch (action.type) {
@@ -26,8 +24,21 @@ const getTileDataReducer = function getTileData(
   }
 };
 
+const stateOfMenuReducer = function setStateOfMenu(
+  stateofMenu = false,
+  action
+){
+  switch (action.type) {
+    case "SET_STATE_OF_MENU":
+      return (stateofMenu = action.state)
+    default:
+      return stateofMenu
+  }
+}
+
 const rootReducer = combineReducers({
   getPostsDataReducer,
-  getTileDataReducer
+  getTileDataReducer,
+  stateOfMenuReducer
 });
 export default rootReducer;

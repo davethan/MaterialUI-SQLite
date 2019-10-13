@@ -31,3 +31,11 @@ export function loadTileData(data) {
     state: data
   };
 }
+
+export function setStateOfMenu(stateofMenu){
+  console.log(stateofMenu)
+  return {
+    type: "SET_STATE_OF_MENU",
+    state: stateofMenu
+  }
+}

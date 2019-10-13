@@ -8,17 +8,17 @@ import Icon from '@mdi/react';
 import { mdiDotsVertical } from '@mdi/js';
 import {Link} from 'react-router-dom'
 import useStyles from './Style.js'
+import { setStateOfMenu } from "../../redux/actions"
 
-export default function Dropdown() {
-  const [open, setOpen] = React.useState(false);
+export default function Dropdown(props) {
   const classes = useStyles();
 
   const handleClick = () => {
-    setOpen(prev => !prev);
+    props.dispatch(setStateOfMenu(true));
   };
 
   const handleClickAway = () => {
-    setOpen(false);
+    props.dispatch(setStateOfMenu(false));
   };
 
   return (
@@ -28,7 +28,7 @@ export default function Dropdown() {
           <IconButton onClick={handleClick} edge="start" className={classes.menuButton} aria-label="menu">
             <Icon color="white" size={1} path={mdiDotsVertical} />
           </IconButton>
-          {open ? (
+          {props.stateOfMenu ? (
             <Paper className={classes.paper}>
               <Link className={classes.link} to="/"><MenuItem><Typography>Latest News</Typography></MenuItem></Link>
               <Link className={classes.link} to="/photos"><MenuItem><Typography>Photos</Typography></MenuItem></Link>
