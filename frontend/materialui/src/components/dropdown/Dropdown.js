@@ -32,7 +32,7 @@ export default function Dropdown(props) {
             <Paper className={classes.paper}>
               <Link className={classes.link} to="/"><MenuItem><Typography>Latest News</Typography></MenuItem></Link>
               <Link className={classes.link} to="/photos"><MenuItem><Typography>Photos</Typography></MenuItem></Link>
-              <Link className={classes.link} to="/thirdlink"><MenuItem><Typography>third link</Typography></MenuItem></Link>
+              <Link className={classes.link} to="/music"><MenuItem><Typography>My music</Typography></MenuItem></Link>
               <Link className={classes.link} to="/fourthlink"><MenuItem><Typography>fourth link</Typography></MenuItem></Link>
             </Paper>
           ) : null}

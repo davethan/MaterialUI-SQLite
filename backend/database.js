@@ -28,6 +28,7 @@ let db = new sqlite3.Database(DBSOURCE, (err) => {
                 db.run(insert, ["img4.jpg","Breakfast","My daily breakfast included eggs, bacon, beans, marmelade, etc... :)","The breakfast of the Gods!"]);
             }
         });
+
         db.run(`CREATE TABLE tileImages(
           id INTEGER PRIMARY KEY AUTOINCREMENT,
           imageName TEXT,
@@ -50,6 +51,25 @@ let db = new sqlite3.Database(DBSOURCE, (err) => {
           db.run(insert,["img8.jpg","Image8","3"]);
         }
       });
+
+      db.run(`CREATE TABLE MusicPosts(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        title TEXT,
+        artist TEXT,
+        imageName TEXT
+      )`,
+    (err)=>{
+      if (err) {
+        //table already created
+      }else{
+        //The data are not being inserted by this order, so the id becomes useless... FIX IT!!!
+        var insert = 'INSERT INTO MusicPosts(title, artist, imageName) VALUES (?,?,?)'
+        db.run(insert,["Take five","Dave Brubeck","daveBrubeck.jpg"]);
+        db.run(insert,["A night without stars","Cayetano","caye.jpg"]);
+        db.run(insert,["Car wash","Christian McBride trio","christian.jpg"]);
+        db.run(insert,["Postcards from italy","Beirut","beirut.jpg"]);
+      }
+    });
     }
 });
 

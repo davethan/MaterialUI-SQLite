@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import {Link} from 'react-router-dom';
 import useStyles from './Style.js';
 
-export default function AllPosts(props) {
+export default function OnePost(props) {
   const classes = useStyles();
   return (
         <Card className={classes.card}>

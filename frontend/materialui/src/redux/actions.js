@@ -1,6 +1,6 @@
 export function startGettingPostsData() {
   return dispatch => {
-    return fetch('http://localhost:3001/allTheDB/')
+    return fetch('http://localhost:3001/allPosts/')
     .then(response => response.json())
     .then(data => {
         dispatch(loadPostsData(data)); //trigger the action
@@ -20,7 +20,7 @@ export function startGettingTileData() {
     return fetch('http://localhost:3001/tileImages/')
     .then(response => response.json())
     .then(data => {
-        dispatch(loadTileData(data)); //trigger the action
+        dispatch(loadTileData(data));
     });
   };
 }
@@ -28,6 +28,23 @@ export function startGettingTileData() {
 export function loadTileData(data) {
   return {
     type: "GET_TILE_DATA",
+    state: data
+  };
+}
+
+export function startGettingMusicPostsData() {
+  return dispatch => {
+    return fetch('http://localhost:3001/allMusicPosts/')
+    .then(response => response.json())
+    .then(data => {
+        dispatch(loadMusicPostsData(data));
+    });
+  };
+}
+
+export function loadMusicPostsData(data) {
+  return {
+    type: "GET_MUSIC_POSTS_DATA",
     state: data
   };
 }

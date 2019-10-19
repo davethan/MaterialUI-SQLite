@@ -4,14 +4,16 @@ import ImageContainer from '../imageContainer/ImageContainer.js';
 import {Route} from 'react-router-dom';
 // import Typography from '@material-ui/core/Typography';
 import Header from '../header/Header.js';
-import AllPosts from '../allPosts/AllPosts.js';
+import OnePost from '../onePost/OnePost.js';
 import Footer from '../footer/Footer.js';
 import Post from '../post/Post.js';
+import MusicPost from '../musicPost/MusicPost.js';
 import Loading from '../loading/Loading.js';
-import useStyles from './Style.js'
+import useStyles from './Style.js';
 import { connect } from "react-redux";
-import { startGettingPostsData } from "../../redux/actions.js"
-import { startGettingTileData } from "../../redux/actions.js"
+import { startGettingPostsData,
+         startGettingTileData,
+         startGettingMusicPostsData} from "../../redux/actions.js";
 
 function App(props) {
   const classes = useStyles();
@@ -24,17 +26,21 @@ function App(props) {
     props.dispatch(startGettingTileData())
   }
 
+  if (props.dataByReducers.getMusicPostsDataReducer === null){
+    props.dispatch(startGettingMusicPostsData())
+  }
+
   //returning every post
   const returnPosts = ()=>{
     if (props.dataByReducers.getPostsDataReducer === null) {return(<Loading/>)}
     else {
       return(
         props.dataByReducers.getPostsDataReducer.map((card,id) => (
-          <AllPosts key={id}
-                    id={props.dataByReducers.getPostsDataReducer[id].id}
-                    imageName={props.dataByReducers.getPostsDataReducer[id].imageName}
-                    title={props.dataByReducers.getPostsDataReducer[id].title}
-                    description={props.dataByReducers.getPostsDataReducer[id].description}
+          <OnePost key={id}
+                   id={props.dataByReducers.getPostsDataReducer[id].id}
+                   imageName={props.dataByReducers.getPostsDataReducer[id].imageName}
+                   title={props.dataByReducers.getPostsDataReducer[id].title}
+                   description={props.dataByReducers.getPostsDataReducer[id].description}
           />
         ))
       )
@@ -73,6 +79,9 @@ function App(props) {
         <div>
           {individualPost(params)}
         </div>
+      )}/>
+      <Route exact path ="/music" render={()=>(
+        <MusicPost/>
       )}/>
       <Footer/>
     </div>

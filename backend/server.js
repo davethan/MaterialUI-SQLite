@@ -15,11 +15,13 @@ app.get("/", (req, res, next) => {
 });
 
 // Insert here other API endpoints
-var allTheDB = require('./components/allTheDB');
+var allPosts = require('./components/allPosts');
 var tileImages = require('./components/tileImages');
+var allMusicPosts = require('./components/allMusicPosts');
 
-app.use('/allTheDB', allTheDB);
-app.use('/tileImages',tileImages)
+app.use('/allPosts', allPosts);
+app.use('/tileImages',tileImages);
+app.use('/allMusicPosts',allMusicPosts);
 
 // Default response for any other request
 app.use(function(req, res){

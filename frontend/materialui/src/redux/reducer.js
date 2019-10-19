@@ -24,6 +24,18 @@ const getTileDataReducer = function getTileData(
   }
 };
 
+const getMusicPostsDataReducer = function getMusicPostsData(
+  musicPostData = null,
+  action
+) {
+  switch (action.type) {
+    case "GET_MUSIC_POSTS_DATA":
+      return (musicPostData = action.state);
+    default:
+      return musicPostData;
+  }
+};
+
 const stateOfMenuReducer = function setStateOfMenu(
   stateofMenu = false,
   action
@@ -39,6 +51,7 @@ const stateOfMenuReducer = function setStateOfMenu(
 const rootReducer = combineReducers({
   getPostsDataReducer,
   getTileDataReducer,
+  getMusicPostsDataReducer,
   stateOfMenuReducer
 });
 export default rootReducer;
