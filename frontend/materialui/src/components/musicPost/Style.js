@@ -3,9 +3,10 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles(theme => ({
   card: {
     display: 'flex',
-    width: '50%',
+    width: '40%',
     margin:'auto',
     marginBottom: '0.5rem',
+    justifyContent: 'space-between'
   },
   details: {
     display: 'flex',

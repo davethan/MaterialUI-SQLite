@@ -50,7 +50,6 @@ export function loadMusicPostsData(data) {
 }
 
 export function setStateOfMenu(stateofMenu){
-  console.log(stateofMenu)
   return {
     type: "SET_STATE_OF_MENU",
     state: stateofMenu

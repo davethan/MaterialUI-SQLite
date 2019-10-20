@@ -33,7 +33,6 @@ export default function Dropdown(props) {
               <Link className={classes.link} to="/"><MenuItem><Typography>Latest News</Typography></MenuItem></Link>
               <Link className={classes.link} to="/photos"><MenuItem><Typography>Photos</Typography></MenuItem></Link>
               <Link className={classes.link} to="/music"><MenuItem><Typography>My music</Typography></MenuItem></Link>
-              <Link className={classes.link} to="/fourthlink"><MenuItem><Typography>fourth link</Typography></MenuItem></Link>
             </Paper>
           ) : null}
         </div>
