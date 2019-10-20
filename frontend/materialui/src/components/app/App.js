@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ImageContainer from '../imageContainer/ImageContainer.js';
 // import Button from '@material-ui/core/Button';
 import {Route} from 'react-router-dom';
@@ -7,7 +7,7 @@ import Header from '../header/Header.js';
 import OnePost from '../onePost/OnePost.js';
 import Footer from '../footer/Footer.js';
 import Post from '../post/Post.js';
-import MusicPost from '../musicPost/MusicPost.js';
+import AllMusicPosts from '../allMusicPosts/AllMusicPosts.js';
 import Loading from '../loading/Loading.js';
 import useStyles from './Style.js';
 import { connect } from "react-redux";
@@ -18,17 +18,19 @@ import { startGettingPostsData,
 function App(props) {
   const classes = useStyles();
 
-  if (props.dataByReducers.getPostsDataReducer === null){
-    props.dispatch(startGettingPostsData())
-  }
+  useEffect(() => {
+    if (props.dataByReducers.getPostsDataReducer === null){
+      props.dispatch(startGettingPostsData())
+    }
 
-  if (props.dataByReducers.getTileDataReducer === null){
-    props.dispatch(startGettingTileData())
-  }
+    if (props.dataByReducers.getTileDataReducer === null){
+      props.dispatch(startGettingTileData())
+    }
 
-  if (props.dataByReducers.getMusicPostsDataReducer === null){
-    props.dispatch(startGettingMusicPostsData())
-  }
+    if (props.dataByReducers.getMusicPostsDataReducer === null){
+      props.dispatch(startGettingMusicPostsData())
+    }
+  });
 
   //returning every post
   const returnPosts = ()=>{
@@ -81,7 +83,7 @@ function App(props) {
         </div>
       )}/>
       <Route exact path ="/music" render={()=>(
-        <MusicPost/>
+        <AllMusicPosts props={props.dataByReducers.getMusicPostsDataReducer}/>
       )}/>
       <Footer/>
     </div>
