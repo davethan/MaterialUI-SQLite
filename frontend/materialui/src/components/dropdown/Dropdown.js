@@ -8,17 +8,16 @@ import Icon from '@mdi/react';
 import { mdiDotsVertical } from '@mdi/js';
 import {Link} from 'react-router-dom'
 import useStyles from './Style.js'
-import { setStateOfMenu } from "../../redux/actions"
 
 export default function Dropdown(props) {
   const classes = useStyles();
 
   const handleClick = () => {
-    props.dispatch(setStateOfMenu(true));
+    props.setStateOfMenu(true);
   };
 
   const handleClickAway = () => {
-    props.dispatch(setStateOfMenu(false));
+    props.setStateOfMenu(false);
   };
 
   return (

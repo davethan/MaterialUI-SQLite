@@ -11,38 +11,37 @@ import AllMusicPosts from '../allMusicPosts/AllMusicPosts.js';
 import Loading from '../loading/Loading.js';
 import useStyles from './Style.js';
 import { connect } from "react-redux";
-import { startGettingPostsData,
-         startGettingTileData,
-         startGettingMusicPostsData} from "../../redux/actions.js";
+import {bindActionCreators} from 'redux';
+import * as actions from "../../redux/actions.js";
 
 function App(props) {
   const classes = useStyles();
 
   useEffect(() => {
-    if (props.dataByReducers.getPostsDataReducer === null){
-      props.dispatch(startGettingPostsData())
+    if (props.getPostsDataReducer === null){
+      props.startGettingPostsData()
     }
 
-    if (props.dataByReducers.getTileDataReducer === null){
-      props.dispatch(startGettingTileData())
+    if (props.getTileDataReducer === null){
+      props.startGettingTileData()
     }
 
-    if (props.dataByReducers.getMusicPostsDataReducer === null){
-      props.dispatch(startGettingMusicPostsData())
+    if (props.getMusicPostsDataReducer === null){
+      props.startGettingMusicPostsData()
     }
   });
 
   //returning every post
   const returnPosts = ()=>{
-    if (props.dataByReducers.getPostsDataReducer === null) {return(<Loading/>)}
+    if (props.getPostsDataReducer === null) {return(<Loading/>)}
     else {
       return(
-        props.dataByReducers.getPostsDataReducer.map((card,id) => (
+        props.getPostsDataReducer.map((card,id) => (
           <OnePost key={id}
-                   id={props.dataByReducers.getPostsDataReducer[id].id}
-                   imageName={props.dataByReducers.getPostsDataReducer[id].imageName}
-                   title={props.dataByReducers.getPostsDataReducer[id].title}
-                   description={props.dataByReducers.getPostsDataReducer[id].description}
+                   id={props.getPostsDataReducer[id].id}
+                   imageName={props.getPostsDataReducer[id].imageName}
+                   title={props.getPostsDataReducer[id].title}
+                   description={props.getPostsDataReducer[id].description}
           />
         ))
       )
@@ -50,16 +49,16 @@ function App(props) {
   }
 
   const individualPost = (params) => {
-    if (props.dataByReducers.getPostsDataReducer !== null){
+    if (props.getPostsDataReducer !== null){
       const id = Number(params.match.params.id)
-      const propsToBeSent = props.dataByReducers.getPostsDataReducer[id-1]
+      const propsToBeSent = props.getPostsDataReducer[id-1]
       return (<Post {...params} {...propsToBeSent}/>)
     }
   }
 
   return (
     <div>
-      <Header stateOfMenu={props.dataByReducers.stateOfMenuReducer} dispatch={props.dispatch}/>
+      <Header stateOfMenu={props.stateOfMenuReducer} setStateOfMenu={props.setStateOfMenu}/>
       <Route exact path="/" render={()=>(
         <div className={classes.mainPage}>
           {returnPosts()}
@@ -75,7 +74,7 @@ function App(props) {
         </div>
       )}/>
       <Route exact path="/photos" render={()=>(
-        <ImageContainer props={props.dataByReducers.getTileDataReducer}/>
+        <ImageContainer props={props.getTileDataReducer}/>
       )}/>
       <Route exact path="/post/:id" render={(params)=>(
         <div>
@@ -83,7 +82,7 @@ function App(props) {
         </div>
       )}/>
       <Route exact path ="/music" render={()=>(
-        <AllMusicPosts props={props.dataByReducers.getMusicPostsDataReducer}/>
+        <AllMusicPosts props={props.getMusicPostsDataReducer}/>
       )}/>
       <Footer/>
     </div>
@@ -93,8 +92,15 @@ function App(props) {
 //Redux Injection!
 function mapStateToProps(state) {
   return {
-    dataByReducers: state
+    getMusicPostsDataReducer: state.getMusicPostsDataReducer,
+    getTileDataReducer: state.getTileDataReducer,
+    getPostsDataReducer: state.getPostsDataReducer,
+    stateOfMenuReducer: state.stateOfMenuReducer
   };
 }
 
-export default connect(mapStateToProps)(App)
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators(actions, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
