@@ -9,6 +9,12 @@ const useStyles = makeStyles(theme => ({
     width: '164px',
     margin:'auto',
     textTransform:'none',
+  },
+  link:{
+    margin:'auto',
+    textTransform:'none',
+    textDecoration:'none',
+    color:'black'
   }
 }));
 

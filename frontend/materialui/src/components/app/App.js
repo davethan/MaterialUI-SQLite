@@ -1,14 +1,15 @@
 import React, { useEffect } from 'react';
 import ImageContainer from '../imageContainer/ImageContainer.js';
-// import Button from '@material-ui/core/Button';
-import {Route} from 'react-router-dom';
-// import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import {Route, Link} from 'react-router-dom';
+import Typography from '@material-ui/core/Typography';
 import Header from '../header/Header.js';
 import OnePost from '../onePost/OnePost.js';
 import Footer from '../footer/Footer.js';
 import Post from '../post/Post.js';
 import AllMusicPosts from '../allMusicPosts/AllMusicPosts.js';
 import Loading from '../loading/Loading.js';
+import UploadForm from '../uploadForm/UploadForm.js';
 import useStyles from './Style.js';
 import { connect } from "react-redux";
 import {bindActionCreators} from 'redux';
@@ -59,31 +60,40 @@ function App(props) {
   return (
     <div>
       <Header stateOfMenu={props.stateOfMenuReducer} setStateOfMenu={props.setStateOfMenu}/>
+
       <Route exact path="/" render={()=>(
         <div className={classes.mainPage}>
           {returnPosts()}
-          {/*
-          <Button
-            variant="contained"
-            color="secondary"
-            className={classes.uploadButton}
-          >
-            <Typography variant="h6">Upload a post!</Typography>
-          </Button>
-          */}
+          <Link className={classes.link} to="/uploadForm">
+            <Button
+              variant="contained"
+              color="secondary"
+              className={classes.uploadButton}
+            >
+              <Typography variant="h6">Upload a post!</Typography>
+            </Button>
+          </Link>
         </div>
       )}/>
+
+      <Route exact path="/uploadForm" render={()=>(
+        <UploadForm/>
+      )}/>
+
       <Route exact path="/photos" render={()=>(
         <ImageContainer props={props.getTileDataReducer}/>
       )}/>
+
       <Route exact path="/post/:id" render={(params)=>(
         <div>
           {individualPost(params)}
         </div>
       )}/>
+
       <Route exact path ="/music" render={()=>(
         <AllMusicPosts props={props.getMusicPostsDataReducer}/>
       )}/>
+
       <Footer/>
     </div>
   );
