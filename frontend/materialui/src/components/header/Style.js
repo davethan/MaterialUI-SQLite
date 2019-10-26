@@ -27,6 +27,11 @@ const useStyles = makeStyles(theme => ({
     color:'white',
     textDecoration:'none',
   },
+  link:{
+    textTransform:'none',
+    textDecoration:'none',
+    color:'white'
+  }
   // '@font-face':{
   //     fontFamily: 'billabongregular',
   //     src: 'url(https://cdn.rawgit.com/milktronics/beaglegr.am/master/public/fonts/billabong-webfont.eot)',

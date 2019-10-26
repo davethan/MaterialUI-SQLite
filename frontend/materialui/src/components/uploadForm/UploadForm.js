@@ -1,126 +1,156 @@
-/*
-import React from 'react';
+import React, { Component } from "react";
+import Dropzone from "../dropzone/Dropzone";
+import "./Upload.css";
+import Progress from "../progress/Progress";
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 
-export default function UploadForm() {
-    return (
-      <div >
-      </div>
-    );
-}
-*/
-import React, { Component } from 'react';
-import axios from 'axios';
-import {Progress} from 'reactstrap';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 class UploadForm extends Component {
   constructor(props) {
     super(props);
-      this.state = {
-        selectedFile: null,
-        loaded:0
-      }
+    this.state = {
+      files: [],
+      uploading: false,
+      uploadProgress: {},
+      successfullUploaded: false
+    };
 
+    this.onFilesAdded = this.onFilesAdded.bind(this);
+    this.uploadFiles = this.uploadFiles.bind(this);
+    this.sendRequest = this.sendRequest.bind(this);
+    this.renderActions = this.renderActions.bind(this);
   }
-  checkMimeType=(event)=>{
-    //getting file object
-    let files = event.target.files
-    //define message container
-    let err = []
-    // list allow mime type
-   const types = ['image/png', 'image/jpeg', 'image/gif']
-    // loop access array
-    for(var x = 0; x<files.length; x++) {
-     // compare file type find doesn't matach
-         if (types.every(type => files[x].type !== type)) {
-         // create error message and assign to container
-         err[x] = files[x].type+' is not a supported format\n';
-       }
-     };
-     for(var z = 0; z<err.length; z++) {// if message not same old that mean has error
-         // discard selected file
-        toast.error(err[z])
-        event.target.value = null
-    }
-   return true;
+
+  onFilesAdded(files) {
+    this.setState(prevState => ({
+      files: prevState.files.concat(files)
+    }));
   }
-  maxSelectFile=(event)=>{
-    let files = event.target.files
-        if (files.length > 3) {
-           const msg = 'Only 3 images can be uploaded at a time'
-           event.target.value = null
-           toast.warn(msg)
-           return false;
-      }
-    return true;
- }
- checkFileSize=(event)=>{
-  let files = event.target.files
-  let size = 20000000000
-  let err = [];
-  for(var x = 0; x<files.length; x++) {
-  if (files[x].size > size) {
-   err[x] = files[x].type+'is too large, please pick a smaller file\n';
- }
-};
-for(var z = 0; z<err.length; z++) {// if message not same old that mean has error
-  // discard selected file
- toast.error(err[z])
- event.target.value = null
-}
-return true;
-}
-onChangeHandler=event=>{
-  var files = event.target.files
-  if(this.maxSelectFile(event) && this.checkMimeType(event) &&    this.checkFileSize(event)){
-  // if return true allow to setState
-     this.setState({
-     selectedFile: files,
-     loaded:0
-  })
-}
-}
-  onClickHandler = () => {
-    const data = new FormData()
-    // for(var x = 0; x<this.state.selectedFile.length; x++) {
-      data.append('file', this.state.selectedFile)
-      console.log(this.state.selectedFile);
-    // }
-    axios.post("http://localhost:3001/upload", data, {
-      onUploadProgress: ProgressEvent => {
-        console.log(data);
-        this.setState({
-          loaded: (ProgressEvent.loaded / ProgressEvent.total*100),
-        })
-      },
-    })
-      .then(res => { // then print response status
-        toast.success('upload success')
-      })
-      .catch(err => { // then print response status
-        toast.error('upload fail')
-      })
+
+  async uploadFiles() {
+    this.setState({ uploadProgress: {}, uploading: true });
+    const promises = [];
+    this.state.files.forEach(file => {
+      promises.push(this.sendRequest(file));
+    });
+    try {
+      await Promise.all(promises);
+
+      this.setState({ successfullUploaded: true, uploading: false });
+    } catch (e) {
+      // Not Production ready! Do some error handling here instead...
+      this.setState({ successfullUploaded: true, uploading: false });
     }
+  }
+
+  sendRequest(file) {
+    return new Promise((resolve, reject) => {
+      const req = new XMLHttpRequest();
+
+      req.upload.addEventListener("progress", event => {
+        if (event.lengthComputable) {
+          const copy = { ...this.state.uploadProgress };
+          copy[file.name] = {
+            state: "pending",
+            percentage: (event.loaded / event.total) * 100
+          };
+          this.setState({ uploadProgress: copy });
+        }
+      });
+
+      req.upload.addEventListener("load", event => {
+        const copy = { ...this.state.uploadProgress };
+        copy[file.name] = { state: "done", percentage: 100 };
+        this.setState({ uploadProgress: copy });
+        resolve(req.response);
+      });
+
+      req.upload.addEventListener("error", event => {
+        const copy = { ...this.state.uploadProgress };
+        copy[file.name] = { state: "error", percentage: 0 };
+        this.setState({ uploadProgress: copy });
+        reject(req.response);
+      });
+
+      const formData = new FormData();
+      formData.append("file", file, file.name);
+
+      req.open("POST", "http://localhost:3001/upload");
+      req.send(formData);
+    });
+  }
+
+  renderProgress(file) {
+    const uploadProgress = this.state.uploadProgress[file.name];
+    if (this.state.uploading || this.state.successfullUploaded) {
+      return (
+        <div className="ProgressWrapper">
+          <Progress progress={uploadProgress ? uploadProgress.percentage : 0} />
+          <img
+            className="CheckIcon"
+            alt="done"
+            src="baseline-check_circle_outline-24px.svg"
+            style={{
+              opacity:
+                uploadProgress && uploadProgress.state === "done" ? 0.5 : 0
+            }}
+          />
+        </div>
+      );
+    }
+  }
+
+  renderActions() {
+    if (this.state.successfullUploaded) {
+      return (
+        <Button
+          variant="contained"
+          color="secondary"
+          className="UploadButton"
+          onClick={() =>
+            this.setState({ files: [], successfullUploaded: false })
+          }
+        >
+          <Typography variant="h6">Clear</Typography>
+        </Button>
+      );
+    } else {
+      return (
+        <Button
+          variant="contained"
+          color="secondary"
+          className="UploadButton"
+          disabled={this.state.files.length < 0 || this.state.uploading}
+          onClick={this.uploadFiles}
+        >
+          <Typography variant="h6">Send!</Typography>
+        </Button>
+      );
+    }
+  }
 
   render() {
     return (
-      <div class="container">
-	      <div class="row">
-      	  <div class="offset-md-3 col-md-6">
-               <div class="form-group files">
-                <label>Upload Your File </label>
-                <input type="file" class="form-control" multiple onChange={this.onChangeHandler}/>
-              </div>
-              <div class="form-group">
-              <ToastContainer />
-              <Progress max="100" color="success" value={this.state.loaded} >{Math.round(this.state.loaded,2) }%</Progress>
-
-              </div>
-
-              <button type="button" class="btn btn-success btn-block" onClick={this.onClickHandler}>Upload</button>
-
-	      </div>
-      </div>
+      <div className="Upload">
+        <div className="Content">
+          <div>
+            <Dropzone
+              onFilesAdded={this.onFilesAdded}
+              disabled={this.state.uploading || this.state.successfullUploaded}
+            />
+          </div>
+          <div className="Files">
+            {this.state.files.map(file => {
+              return (
+                <div key={file.name} className="Row">
+                  <span className="Filename">{file.name}</span>
+                  {this.renderProgress(file)}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+        <div className="Actions">{this.renderActions()}</div>
       </div>
     );
   }

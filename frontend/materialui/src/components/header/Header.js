@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import {Link} from 'react-router-dom';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Slide from '@material-ui/core/Slide';
 import Dropdown from '../dropdown/Dropdown.js';
@@ -36,7 +37,9 @@ export default function HideAppBar(props) {
       <HideOnScroll {...props}>
         <AppBar className={classes.appBar}>
           <Toolbar className={classes.toolbar}>
-            <h2 className={classes.h2}><a className={classes.a} href="http://localhost:3000/">My Summer</a></h2>
+            <Link className={classes.link} to="/">
+              <h2 className={classes.h2}>My Summer</h2>
+            </Link>
             <Dropdown {...props}/>
           </Toolbar>
         </AppBar>

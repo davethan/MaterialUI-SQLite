@@ -1,0 +1,15 @@
+.Upload {
+  width: fit-content;
+  flex-direction: column;
+  flex: 1;
+  align-items: flex-start;
+  text-align: center;
+  overflow: hidden;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 2.5rem;
+}
+
+.UploadButton {
+  text-transform: none; /*fix this*/
+}
