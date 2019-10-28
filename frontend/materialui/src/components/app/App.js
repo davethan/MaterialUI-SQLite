@@ -63,7 +63,6 @@ function App(props) {
 
       <Route exact path="/" render={()=>(
         <div className={classes.mainPage}>
-          {returnPosts()}
           <Link className={classes.link} to="/uploadForm">
             <Button
               variant="contained"
@@ -73,6 +72,7 @@ function App(props) {
               <Typography variant="h6">Upload a post!</Typography>
             </Button>
           </Link>
+          {returnPosts()}
         </div>
       )}/>
 

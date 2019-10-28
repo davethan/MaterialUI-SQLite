@@ -8,6 +8,8 @@ const useStyles = makeStyles(theme => ({
   uploadButton:{
     width: '164px',
     margin:'auto',
+    marginBottom: '0.3rem',
+    marginTop: '0.3rem',
     textTransform:'none',
   },
   link:{

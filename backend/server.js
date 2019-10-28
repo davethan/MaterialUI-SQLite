@@ -14,15 +14,10 @@ app.get("/", (req, res, next) => {
 });
 
 // Insert here other API endpoints
-var allPosts = require('./components/allPosts');
-var tileImages = require('./components/tileImages');
-var allMusicPosts = require("./components/allMusicPosts");
-var upload = require('./components/upload');
-
-app.use('/allPosts', allPosts);
-app.use('/tileImages',tileImages);
-app.use('/allMusicPosts',allMusicPosts);
-app.post("/upload", upload);
+app.use('/allPosts', require('./components/allPosts'));
+app.use('/tileImages',require('./components/tileImages'));
+app.use('/allMusicPosts', require("./components/allMusicPosts"));
+app.post("/upload", require('./components/upload'));
 
 // Default response for any other request
 app.use(function(req, res){

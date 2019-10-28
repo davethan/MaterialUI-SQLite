@@ -4,6 +4,8 @@ import "./Upload.css";
 import Progress from "../progress/Progress";
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import Icon from '@mdi/react';
+import { mdiCheck, mdiCancel  } from '@mdi/js';
 
 class UploadForm extends Component {
   constructor(props) {
@@ -31,7 +33,9 @@ class UploadForm extends Component {
     this.setState({ uploadProgress: {}, uploading: true });
     const promises = [];
     this.state.files.forEach(file => {
-      promises.push(this.sendRequest(file));
+      if (file.type==="image/jpeg" || file.type==="image/jpg" || file.type==="image/png"){
+        promises.push(this.sendRequest(file));
+      }
     });
     try {
       await Promise.all(promises);
@@ -82,19 +86,21 @@ class UploadForm extends Component {
 
   renderProgress(file) {
     const uploadProgress = this.state.uploadProgress[file.name];
-    if (this.state.uploading || this.state.successfullUploaded) {
+    if (file.type==="image/jpeg" || file.type==="image/jpg" || file.type==="image/png"){
+      if (this.state.uploading || this.state.successfullUploaded) {
+        return (
+          <div className="ProgressWrapper">
+            <Progress progress={uploadProgress ? uploadProgress.percentage : 0} />
+            <Icon className="CheckIcon" color="green" size={1} path={mdiCheck} />
+          </div>
+        );
+      }
+    }
+    else {
       return (
         <div className="ProgressWrapper">
-          <Progress progress={uploadProgress ? uploadProgress.percentage : 0} />
-          <img
-            className="CheckIcon"
-            alt="done"
-            src="baseline-check_circle_outline-24px.svg"
-            style={{
-              opacity:
-                uploadProgress && uploadProgress.state === "done" ? 0.5 : 0
-            }}
-          />
+          Image expected...
+          <Icon className="CheckIcon" color="red" size={1} path={mdiCancel} />
         </div>
       );
     }
