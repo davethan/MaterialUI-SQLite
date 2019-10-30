@@ -13,3 +13,8 @@
 .UploadButton {
   text-transform: none; /*fix this*/
 }
+
+.AllInputs{
+  display: flex;
+  flex-direction: column;
+}

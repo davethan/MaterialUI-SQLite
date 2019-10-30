@@ -73,7 +73,7 @@ class Dropzone extends Component {
           ref={this.fileInputRef}
           className="FileInput"
           type="file"
-          multiple
+          required
           onChange={this.onFilesAdded}
         />
         <Icon color="black" size={2.5} path={mdiFileUploadOutline} />
