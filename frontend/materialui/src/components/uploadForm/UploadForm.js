@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Dropzone from "../dropzone/Dropzone";
-import "./Upload.css";
+import styles from "./Styles.js";
+import { withStyles } from '@material-ui/styles';
 import Progress from "../progress/Progress";
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
@@ -62,13 +63,12 @@ class UploadForm extends Component {
         }
         promises.push(this.sendRequest(newPostData));
       }
+      else {this.setState({ successfullUploaded: true, uploading: false });}
     });
-    try {
-      await Promise.all(promises);
-      this.setState({ successfullUploaded: true, uploading: false });
-    } catch (e) {
-      // Not Production ready! Do some error handling here instead...
-      this.setState({ successfullUploaded: true, uploading: false });
+    await Promise.all(promises);
+    this.setState({ successfullUploaded: true, uploading: false });
+    if (promises.length !== 0) {
+      document.location.reload(true);
     }
   }
 
@@ -117,16 +117,18 @@ class UploadForm extends Component {
     if (file.type==="image/jpeg" || file.type==="image/jpg" || file.type==="image/png"){
       if (this.state.uploading || this.state.successfullUploaded) {
         return (
-          <div className="ProgressWrapper">
+          <div>
             <Progress progress={uploadProgress ? uploadProgress.percentage : 0} />
-            <Icon className="CheckIcon" color="green" size={1} path={mdiCheck} />
+            <Icon color="green" size={1} path={mdiCheck} />
           </div>
         );
       }
     }
     else {
+      this.state.successfullUploaded = true;  //fix this!
+      this.renderActions();
       return (
-        <div className="ProgressWrapper">
+        <div>
           Expected an image. This file cannot be uploaded.
         </div>
       );
@@ -134,12 +136,13 @@ class UploadForm extends Component {
   }
 
   renderActions() {
+    const { classes } = this.props;
     if (this.state.successfullUploaded) {
       return (
         <Button
           variant="contained"
           color="secondary"
-          className="UploadButton"
+          className={classes.UploadButton}
           onClick={() =>
             this.setState({ files: [], successfullUploaded: false })
           }
@@ -152,7 +155,7 @@ class UploadForm extends Component {
         <Button
           variant="contained"
           color="secondary"
-          className="UploadButton"
+          className={classes.UploadButton}
           disabled={this.state.files.length < 0 || this.state.uploading}
           onClick={this.uploadFiles}
         >
@@ -163,13 +166,14 @@ class UploadForm extends Component {
   }
 
   render() {
+    const { classes } = this.props;
     return (
-      <div className="Upload">
-        <div className="Content">
-          <div className="AllInputs">
+      <div className={classes.Upload}>
+        <div>
+          <div className={classes.AllInputs}>
             <Dropzone
               onFilesAdded={this.onFilesAdded}
-              disabled={this.state.uploading || this.state.successfullUploaded}
+              disabled={this.state.uploading || this.state.successfullUploaded || this.state.files.length > 0}
             />
             <TextField
               required
@@ -193,21 +197,21 @@ class UploadForm extends Component {
               onChange={this.updateMore.bind(this)}
             />
           </div>
-          <div className="Files">
+          <div>
             {this.state.files.map(file => {
               return (
-                <div key={file.name} className="Row">
-                  <span className="Filename">{file.name}</span>
+                <div key={file.name}>
+                  <span>{file.name}</span>
                   {this.renderProgress(file)}
                 </div>
               );
             })}
           </div>
         </div>
-        <div className="Actions">{this.renderActions()}</div>
+        <div>{this.renderActions()}</div>
       </div>
     );
   }
 }
 
-export default UploadForm;
+export default withStyles(styles)(UploadForm);

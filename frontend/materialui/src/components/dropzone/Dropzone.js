@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import Icon from '@mdi/react';
 import { mdiFileUploadOutline } from '@mdi/js';
-import "./Dropzone.css";
+import styles from "./Styles.js";
+import { withStyles } from '@material-ui/styles';
 
 class Dropzone extends Component {
   constructor(props) {
@@ -60,9 +61,10 @@ class Dropzone extends Component {
   }
 
   render() {
+    const { classes } = this.props;
     return (
       <div
-        className={`Dropzone ${this.state.hightlight ? "Highlight" : ""}`}
+        className={this.state.hightlight ? classes.Highlight : classes.Dropzone}
         onDragOver={this.onDragOver}
         onDragLeave={this.onDragLeave}
         onDrop={this.onDrop}
@@ -71,7 +73,7 @@ class Dropzone extends Component {
       >
         <input
           ref={this.fileInputRef}
-          className="FileInput"
+          className={classes.FileInput}
           type="file"
           required
           onChange={this.onFilesAdded}
@@ -82,4 +84,4 @@ class Dropzone extends Component {
   }
 }
 
-export default Dropzone;
+export default withStyles(styles)(Dropzone);

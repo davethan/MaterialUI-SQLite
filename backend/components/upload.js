@@ -10,7 +10,7 @@ module.exports = function upload(req, res) {
       file.type === "image/jpeg" ||
       file.type === "image/jpg"
     ) {
-      file.name = Date.now() + file.name;
+      file.name = Date.now()+'a';
       file.path = __dirname + "/../images/" + file.name;
     } else {
       console.log("File rejected because it's not a .png, .jpeg or .jpg.");
@@ -29,6 +29,9 @@ module.exports = function upload(req, res) {
       file.file.type === "image/jpeg" ||
       file.file.type === "image/jpg"
     ) {
+      let db = require("../database.js");
+      let insert ="INSERT INTO cardData (imageName, title, description, more) VALUES (?,?,?,?)";
+      db.run (insert, [file.file.name, fields.title, fields.description, fields.more]);
     }
   });
 };
