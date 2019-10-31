@@ -4,7 +4,7 @@ var db = require("../database.js")
 
 router.get("/", (req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-  var sql = "SELECT * FROM cardData"
+  var sql = "SELECT * FROM cardData ORDER BY id DESC"
   var params = []
   db.all(sql, params, (err, rows) => {
     if (err) {

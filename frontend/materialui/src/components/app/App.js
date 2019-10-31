@@ -51,9 +51,9 @@ function App(props) {
 
   const individualPost = (params) => {
     if (props.getPostsDataReducer !== null){
-      const id = Number(params.match.params.id)
-      const propsToBeSent = props.getPostsDataReducer[id-1]
-      return (<Post {...params} {...propsToBeSent}/>)
+      const id = Number(params.match.params.id);
+      const propsToBeSent = props.getPostsDataReducer.find((post) => post.id === id);
+      return (<Post {...params} {...propsToBeSent}/>);
     }
   }
 
