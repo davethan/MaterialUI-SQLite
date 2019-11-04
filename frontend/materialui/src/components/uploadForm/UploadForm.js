@@ -68,7 +68,7 @@ class UploadForm extends Component {
     await Promise.all(promises);
     this.setState({ successfullUploaded: true, uploading: false });
     if (promises.length !== 0) {
-      document.location.reload(true);
+      window.location.href = "http://localhost:3000/";
     }
   }
 
@@ -125,8 +125,10 @@ class UploadForm extends Component {
       }
     }
     else {
-      this.state.successfullUploaded = true;  //fix this!
-      this.renderActions();
+      if (!this.state.successfullUploaded){
+        this.setState({successfullUploaded: true});
+      }
+        this.renderActions();
       return (
         <div>
           Expected an image. This file cannot be uploaded.
