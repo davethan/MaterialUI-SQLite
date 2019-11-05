@@ -68,7 +68,7 @@ class UploadForm extends Component {
     await Promise.all(promises);
     this.setState({ successfullUploaded: true, uploading: false });
     if (promises.length !== 0) {
-      window.location.href = "http://localhost:3000/";
+      this.props.onHistory.push('/');
     }
   }
 

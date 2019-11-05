@@ -76,8 +76,8 @@ function App(props) {
         </div>
       )}/>
 
-      <Route exact path="/uploadForm" render={()=>(
-        <UploadForm/>
+      <Route exact path="/uploadForm" render={({history})=>(
+        <UploadForm onHistory={history}/>
       )}/>
 
       <Route exact path="/photos" render={()=>(
