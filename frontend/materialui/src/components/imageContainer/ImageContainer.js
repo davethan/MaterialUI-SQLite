@@ -16,7 +16,7 @@ export default function ImageContainer(props) {
         <GridList cellHeight={160} className={classes.gridList} cols={3}>
           {props.props.map((tile,id) => (
             <GridListTile key={id} cols={props.props[id].cols || 1}>
-              <img src={require('../../../../../backend/images/' + props.props[id].imageName)} alt={props.props[id].title} />
+              <img src={'http://localhost:3001/images/' + props.props[id].imageName} alt={props.props[id].title} />
             </GridListTile>
           ))}
         </GridList>

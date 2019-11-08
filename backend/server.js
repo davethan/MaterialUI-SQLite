@@ -3,6 +3,7 @@ var express = require("express");
 var app = express();
 var db = require("./database.js");
 var cors = require("cors");
+const serve = require("express-static");
 var corsOptions = {
   origin: "*",
   optionsSuccessStatus: 200
@@ -18,6 +19,7 @@ app.use('/allPosts', require('./components/allPosts'));
 app.use('/tileImages',require('./components/tileImages'));
 app.use('/allMusicPosts', require("./components/allMusicPosts"));
 app.post("/upload", require('./components/upload'));
+app.use(serve(__dirname+'/public'));
 
 // Default response for any other request
 app.use(function(req, res){

@@ -39,7 +39,7 @@ export default function MusicPost(props) {
       </div>
       <CardMedia
         className={classes.cover}
-        image={require('../../../../../backend/musicImages/' + props.imageName)}
+        image={'http://localhost:3001/musicImages/' + props.imageName}
         title={props.title}
       />
     </Card>

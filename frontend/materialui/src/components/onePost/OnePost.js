@@ -15,7 +15,7 @@ export default function OnePost(props) {
           <CardActionArea>
             <CardMedia
               className={classes.media}
-              image={require('../../../../../backend/images/' + props.imageName)}
+              image={'http://localhost:3001/images/' + props.imageName}
               title={props.title}
             />
             <CardContent color="Secondary" >
