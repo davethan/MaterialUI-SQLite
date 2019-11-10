@@ -49,12 +49,13 @@ export function loadMusicPostsData(data) {
   };
 }
 
-export function startDeletingPost(postId) {
+export function startDeletingPost(postId, imageName) {
   return dispatch => {
     return new Promise((resolve, reject) => {
       const req = new XMLHttpRequest();
 
       const formData = new FormData();
+      formData.append("imageName", imageName);
       formData.append("postId", postId);
 
       req.open("POST", "http://localhost:3001/delete");

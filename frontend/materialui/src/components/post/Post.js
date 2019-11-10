@@ -33,7 +33,7 @@ export default function Post(props) {
           size="medium"
           color="primary"
           onClick = {() => {
-              props.startDeletingPost(props.id);
+              props.startDeletingPost(props.id, props.imageName);
               props.startGettingPostsData();
               props.history.push('/');
           }}>
