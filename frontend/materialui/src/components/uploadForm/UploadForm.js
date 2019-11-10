@@ -68,6 +68,7 @@ class UploadForm extends Component {
     await Promise.all(promises);
     this.setState({ successfullUploaded: true, uploading: false });
     if (promises.length !== 0) {
+      this.props.startGettingPostsData();
       this.props.onHistory.push('/');
     }
   }

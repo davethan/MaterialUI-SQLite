@@ -17,8 +17,9 @@ app.get("/", (req, res, next) => {
 // Insert here other API endpoints
 app.use('/allPosts', require('./components/allPosts'));
 app.use('/tileImages',require('./components/tileImages'));
-app.use('/allMusicPosts', require("./components/allMusicPosts"));
+app.use('/allMusicPosts', require('./components/allMusicPosts'));
 app.post("/upload", require('./components/upload'));
+app.post("/delete", require('./components/delete'));
 app.use(serve(__dirname+'/public'));
 
 // Default response for any other request

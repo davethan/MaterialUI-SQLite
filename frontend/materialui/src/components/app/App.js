@@ -53,7 +53,7 @@ function App(props) {
     if (props.getPostsDataReducer !== null){
       const id = Number(params.match.params.id);
       const propsToBeSent = props.getPostsDataReducer.find((post) => post.id === id);
-      return (<Post {...params} {...propsToBeSent}/>);
+      return (<Post startGettingPostsData={props.startGettingPostsData} startDeletingPost={props.startDeletingPost} {...params} {...propsToBeSent}/>);
     }
   }
 
@@ -77,7 +77,7 @@ function App(props) {
       )}/>
 
       <Route exact path="/uploadForm" render={({history})=>(
-        <UploadForm onHistory={history}/>
+        <UploadForm startGettingPostsData={props.startGettingPostsData} onHistory={history}/>
       )}/>
 
       <Route exact path="/photos" render={()=>(

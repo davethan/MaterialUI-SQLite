@@ -49,6 +49,20 @@ export function loadMusicPostsData(data) {
   };
 }
 
+export function startDeletingPost(postId) {
+  return dispatch => {
+    return new Promise((resolve, reject) => {
+      const req = new XMLHttpRequest();
+
+      const formData = new FormData();
+      formData.append("postId", postId);
+
+      req.open("POST", "http://localhost:3001/delete");
+      req.send(formData);
+    });
+  };
+}
+
 export function setStateOfMenu(stateofMenu){
   return {
     type: "SET_STATE_OF_MENU",

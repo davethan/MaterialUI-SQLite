@@ -11,7 +11,7 @@ module.exports = function upload(req, res) {
       file.type === "image/jpg"
     ) {
       file.name = Date.now() + file.type.replace('image/','.');
-      file.path = __dirname + "/../images/" + file.name;
+      file.path = __dirname + "/../public/images/" + file.name;
     } else {
       console.log("File rejected because it's not a .png, .jpeg or .jpg.");
     }
