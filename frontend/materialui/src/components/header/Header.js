@@ -38,7 +38,7 @@ export default function HideAppBar(props) {
         <AppBar className={classes.appBar}>
           <Toolbar className={classes.toolbar}>
             <Link className={classes.link} to="/">
-              <h2 className={classes.h2}>My Summer</h2>
+              <h2 className={classes.h2}>4 Seasons</h2>
             </Link>
             <Dropdown {...props}/>
           </Toolbar>
